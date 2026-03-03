@@ -1,9 +1,12 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 const CartContext = createContext(null);
 
 export function CartProvider({ children }) {
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState(() => {
+    const saved = localStorage.getItem("cart_v1");
+    return saved ? JSON.parse(saved) : [];
+  });
   function addToCart(product) {
     setItems((prev) => {
       const min = product.minimumOrderQuantity || 1;
@@ -52,6 +55,9 @@ export function CartProvider({ children }) {
   function removeFromCart(id) {
     setItems((prev) => prev.filter((item) => item.id !== id));
   }
+  useEffect(() => {
+    localStorage.setItem("cart_v1", JSON.stringify(items));
+  }, [items]);
 
   return (
     <CartContext.Provider value={{ items, addToCart, setQty, removeFromCart }}>

@@ -1,8 +1,9 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import { getProducts } from "../../utils/productApi";
-import { calcPricing } from "../../utils/pricing";
+import { useCart } from "../../context/CartContext";
 import { formatMoney } from "../../utils/formatMoney";
+import { calcPricing } from "../../utils/pricing";
+import { getProducts } from "../../utils/productApi";
 import {
   filterProducts,
   getCategories,
@@ -10,7 +11,9 @@ import {
 } from "../../utils/products";
 
 import styles from "./Home.module.scss";
+
 export default function Home() {
+  const { addToCart } = useCart();
   const [loading, setLoading] = useState(false);
   const [products, setProducts] = useState([]);
   const [error, setError] = useState("");
@@ -50,8 +53,8 @@ export default function Home() {
         <header className={styles.header}>
           <div>
             <h1 className={styles.h1}>Products</h1>
+            <p className={styles.sub}>{filtered.length} items</p>
           </div>
-          <div className={styles.count}>{filtered.length} items</div>
         </header>
 
         <div className={styles.toolbar}>
@@ -182,7 +185,7 @@ export default function Home() {
                       <button
                         type="button"
                         className={styles.ghostBtn}
-                        onClick={() => console.log("Add to cart:", p.id)}
+                        onClick={() => addToCart(p)}
                       >
                         + Add
                       </button>

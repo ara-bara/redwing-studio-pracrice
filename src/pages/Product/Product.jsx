@@ -3,11 +3,12 @@ import { Link, useParams } from "react-router-dom";
 import { formatMoney } from "../../utils/formatMoney";
 import { calcPricing } from "../../utils/pricing";
 import { getProductsById } from "../../utils/productApi";
+import { useCart } from "../../context/CartContext";
 import styles from "./Product.module.scss";
 import ProductSkeleton from "./ProductSkeleton";
 export default function Product() {
   const { id } = useParams();
-
+  const { addToCart } = useCart();
   const [loading, setLoading] = useState(false);
   const [product, setProduct] = useState(null);
   const [error, setError] = useState("");
@@ -146,7 +147,7 @@ export default function Product() {
             <button
               type="button"
               className={styles.primaryBtn}
-              onClick={() => console.log("Add to cart:", product.id)}
+              onClick={() => addToCart(product)}
             >
               + ADD TO CART
             </button>

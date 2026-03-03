@@ -1,6 +1,6 @@
 .page {
   background: #ffffff;
-  padding: 28px 0 64px;
+  padding: 14px 0 64px;
   color: #111;
 }
 
@@ -39,9 +39,7 @@
   white-space: nowrap;
 }
 
-/* ===== Toolbar ===== */
 .toolbar {
-  /* щоб виглядало “як магазин”, а не порожньо на wide screen */
   max-width: 1080px;
   margin: 0 auto 22px;
 
@@ -54,7 +52,6 @@
   border-bottom: 1px solid #efefef;
 }
 
-/* critical fix: allow grid items to shrink */
 .search,
 .selectWrap {
   min-width: 0;
@@ -76,8 +73,8 @@
   height: 44px;
   padding: 0 12px;
 
-  box-sizing: border-box; /* critical */
-  min-width: 0; /* critical */
+  box-sizing: border-box;
+  min-width: 0;
 
   border: 1px solid #e8e8e8;
   border-radius: 10px;
@@ -85,7 +82,9 @@
   font-size: 14px;
   background: #fff;
 
-  transition: border-color 150ms ease, box-shadow 150ms ease;
+  transition:
+    border-color 150ms ease,
+    box-shadow 150ms ease;
 }
 
 .input:focus,
@@ -94,7 +93,6 @@
   box-shadow: 0 0 0 3px rgba(17, 17, 17, 0.06);
 }
 
-/* ===== Grid ===== */
 .grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -254,7 +252,9 @@
   letter-spacing: 0.6px;
   text-transform: uppercase;
   font-size: 12px;
-  transition: transform 140ms ease, filter 180ms ease;
+  transition:
+    transform 140ms ease,
+    filter 180ms ease;
 }
 
 .primaryBtn:hover {
@@ -274,7 +274,9 @@
   cursor: pointer;
   font-weight: 800;
   letter-spacing: 0.3px;
-  transition: border-color 150ms ease, background 150ms ease;
+  transition:
+    border-color 150ms ease,
+    background 150ms ease;
 }
 
 .ghostBtn:hover {
@@ -294,14 +296,12 @@
   border-top: 1px solid #efefef;
 }
 
-/* ===== Responsive ===== */
 @media (max-width: 1100px) {
   .grid {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
-/* the main fix breakpoint */
 @media (max-width: 820px) {
   .toolbar {
     grid-template-columns: 1fr 1fr;
