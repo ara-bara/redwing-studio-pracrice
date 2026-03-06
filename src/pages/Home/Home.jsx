@@ -21,6 +21,7 @@ export default function Home() {
   const [q, setQ] = useState("");
   const [category, setCategory] = useState("all");
   const [sort, setSort] = useState("featured");
+  const { items } = useCart();
 
   useEffect(() => {
     async function loadProducts() {
@@ -108,7 +109,26 @@ export default function Home() {
                 p.price,
                 p.discountPercentage,
               );
+              const isInCart = items.some((item) => item.id === p.id);
 
+              const cartButton = isInCart ? (
+                <Link to="/cart">
+                  <button
+                    type="button"
+                    className={`${styles.ghostBtn} ${styles.inCartBtn}`}
+                  >
+                    In cart
+                  </button>
+                </Link>
+              ) : (
+                <button
+                  type="button"
+                  className={styles.ghostBtn}
+                  onClick={() => addToCart(p)}
+                >
+                  + Add
+                </button>
+              );
               return (
                 <article key={p.id} className={styles.item}>
                   <Link
@@ -182,13 +202,7 @@ export default function Home() {
                         SEE MORE
                       </Link>
 
-                      <button
-                        type="button"
-                        className={styles.ghostBtn}
-                        onClick={() => addToCart(p)}
-                      >
-                        + Add
-                      </button>
+                      {cartButton}
                     </div>
                   </div>
                 </article>
