@@ -68,7 +68,6 @@
 }
 
 .mediaSticky {
-  position: sticky;
   top: 24px;
 }
 
@@ -476,10 +475,6 @@
   .layout {
     grid-template-columns: 1fr;
     gap: 18px;
-  }
-
-  .mediaSticky {
-    position: static;
   }
 
   .media {
